@@ -5,7 +5,7 @@ var Cart = require("../models/cart");
 var Order = require("../models/order");
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/home', function (req, res, next) {
   Product.find(function (err, docs) {
     var productchunk = [],
       chunksize = 3;
@@ -28,11 +28,11 @@ router.get("/add-to-cart/:id", function (req, res, next) {
 
   Product.findById(productId, function (err, product) {
     if (err) {
-      return res.redirect("/");
+      return res.redirect("/home");
     }
     cart.add(product, product.id);
     req.session.cart = cart;
-    res.redirect("/")
+    res.redirect("/home")
   })
 });
 
